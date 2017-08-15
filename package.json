@@ -1,0 +1,11 @@
+{
+  "name": "imagerotateandcc",
+  "version": "0.0.1",
+  "description": "post proc for image scanning, reshuffling page seq and rotate pages 180 deg.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ben",
+  "license": "ISC"
+}
