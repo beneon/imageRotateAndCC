@@ -7,5 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ben",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "get-image-pixels": "^1.0.1",
+    "luminance": "^1.0.3",
+    "save-pixels": "^2.3.4",
+    "shelljs": "^0.7.8",
+    "zeros": "^1.0.0"
+  }
 }

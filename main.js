@@ -1,12 +1,14 @@
 const path = require('path');
 const fs = require('fs');
 const assert = require('assert');
-fs.readdir(path.join(__dirname,'inputFolder'),(err,files)=>{
+const shell = require('shelljs');
+var inFolder = path.join(__dirname,'inputFolder')
+var outFolder= path.join(__dirname,'outputFolder')
+fs.readdir(inFolder,(err,files)=>{
   var filenameTemplate = /Image\s(\d+)\.jpg/
   var rst = files.filter(e=>filenameTemplate.test(e)).map(e=>{
     return {fname:e,ind:Number.parseInt(filenameTemplate.exec(e)[1])}
   })
-  console.log(rst);
   assert(rst.length%2==0,"img numbers should be even")
   var firstHalf = rst.slice(0,rst.length/2)
   var laterHalf = rst.slice(rst.length/2).reverse()
@@ -15,13 +17,11 @@ fs.readdir(path.join(__dirname,'inputFolder'),(err,files)=>{
     combined.push(e)
     combined.push(laterHalf[i])
   })
-
-  // combined.forEach((e,i)=>{
-  //   copyFile(path.join(__dirname,e.fname),path.join(__dirname,'bck',e.fname))
-  //   fs.rename(path.join(__dirname,e.fname),path.join(__dirname,"resort"+("000"+i).slice(-3)+".jpg"),(err,msg)=>{
-  //     if(err)console.error(err);
-  //   })
-  // })
+  shell.cd(outFolder)
+  shell.rm('*.jpg')
+  combined.forEach((e,i)=>{
+    copyFile(path.join(inFolder,e.fname),path.join(outFolder,"resort"+("000"+i).slice(-3)+".jpg"))
+  })
   function copyFile(src, dist) {
     fs.createReadStream(src).pipe(fs.createWriteStream(dist));
   }
